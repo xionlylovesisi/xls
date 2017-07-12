@@ -1,0 +1,2 @@
+在push的时候出现authFail:
+	本人碰到这个问题的原因是在生成RSA公私钥的时候没有把私钥添加windiows==>preference==>general==>network connection==>ssh==>general中
