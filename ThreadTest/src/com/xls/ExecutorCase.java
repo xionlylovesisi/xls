@@ -1,5 +1,6 @@
 package com.xls;
 
+import java.util.Date;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionHandler;
@@ -11,6 +12,7 @@ public class ExecutorCase {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		System.out.println(new Date(System.nanoTime()));
 		for (int i = 0; i < 10; i++) {
 			executor.execute(new Task());
 		}
