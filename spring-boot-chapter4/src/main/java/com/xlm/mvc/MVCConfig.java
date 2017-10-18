@@ -3,6 +3,8 @@
  */
 package com.xlm.mvc;
 
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -14,9 +16,9 @@ import org.springframework.web.servlet.view.JstlView;
  */
 @Configuration
 @EnableWebMvc
-//默认扫描本类所在的包下所有的包
-//@ComponentScan("com.xlm.mvc")
+@ComponentScan("com.xlm.mvc")
 public class MVCConfig {
+	@Bean
 	public InternalResourceViewResolver viewResolver(){
 		InternalResourceViewResolver internalResourceViewResolver = new InternalResourceViewResolver();
 		internalResourceViewResolver.setPrefix("/WEB-INF/classes/views/");

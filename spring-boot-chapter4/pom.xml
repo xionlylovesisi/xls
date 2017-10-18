@@ -95,13 +95,6 @@
 			<version>${logback.version}</version>
 		</dependency>
 
-		<!--对json和xml格式的支持 -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
-			<version>2.5.3</version>
-		</dependency>
-
 		<!-- file upload -->
 		<dependency>
 			<groupId>commons-fileupload</groupId>
