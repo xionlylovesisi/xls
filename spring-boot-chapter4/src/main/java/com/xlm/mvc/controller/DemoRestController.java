@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xlm.mvc.domain.DemoObj;
 
 /**
+ * rest风格的请求
  * @author XIXI
  *
  */

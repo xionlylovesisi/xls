@@ -32,7 +32,7 @@ public class DemoAnnoController {
 	public @ResponseBody String passRequestParam(HttpServletRequest request,Long id){
 		return "url:"+request.getRequestURL()+" can access,id:"+id;
 	}
-	@RequestMapping(value = "/obj",produces = "application/json;charset=UTF-8")
+	@RequestMapping(value = "/obj",produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public  String passObj(HttpServletRequest request,DemoObj obj){
 		return "url:"+request.getRequestURL()+" can access,obj id:"+obj.getId()+",name:"+obj.getName();
