@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="price.PlatformReferencePriceApproveResultMapper">
+  <resultMap id="BaseResultMap" type="price.PlatformReferencePriceApproveResult">
+    <result column="id" jdbcType="TINYINT" property="id" />
+    <result column="price_warn_id" jdbcType="TINYINT" property="priceWarnId" />
+    <result column="confirm_low_price" jdbcType="TINYINT" property="confirmLowPrice" />
+    <result column="confirm_high_price" jdbcType="TINYINT" property="confirmHighPrice" />
+    <result column="operator_id" jdbcType="TINYINT" property="operatorId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="price_change" jdbcType="TINYINT" property="priceChange" />
+  </resultMap>
+  <insert id="insert" parameterType="price.PlatformReferencePriceApproveResult">
+    insert into t_platform_reference_price_approve_result (id, price_warn_id, confirm_low_price, 
+      confirm_high_price, operator_id, create_time, 
+      price_change)
+    values (#{id,jdbcType=TINYINT}, #{priceWarnId,jdbcType=TINYINT}, #{confirmLowPrice,jdbcType=TINYINT}, 
+      #{confirmHighPrice,jdbcType=TINYINT}, #{operatorId,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{priceChange,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="price.PlatformReferencePriceApproveResult">
+    insert into t_platform_reference_price_approve_result
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="priceWarnId != null">
+        price_warn_id,
+      </if>
+      <if test="confirmLowPrice != null">
+        confirm_low_price,
+      </if>
+      <if test="confirmHighPrice != null">
+        confirm_high_price,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="priceChange != null">
+        price_change,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=TINYINT},
+      </if>
+      <if test="priceWarnId != null">
+        #{priceWarnId,jdbcType=TINYINT},
+      </if>
+      <if test="confirmLowPrice != null">
+        #{confirmLowPrice,jdbcType=TINYINT},
+      </if>
+      <if test="confirmHighPrice != null">
+        #{confirmHighPrice,jdbcType=TINYINT},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=TINYINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="priceChange != null">
+        #{priceChange,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+</mapper>
