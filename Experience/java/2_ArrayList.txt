@@ -1,0 +1,8 @@
+1,四个关注点:
+		1,允许为空
+		2,允许重复数据
+		3,有序
+		4,非线程安全
+2,ArrayList基本元素:
+		1,elementsData一个object数组,是ArrayList最底层的数组;
+		2,size,ArrayList的大小,它是根据add和remove方法进行自增自减的,所以add一个null进入ArrayList,size也会加1
