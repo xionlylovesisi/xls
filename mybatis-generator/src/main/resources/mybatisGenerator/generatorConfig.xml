@@ -18,53 +18,37 @@
 		</commentGenerator>
 
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://192.168.3.113:3306/opt_quote" userId="root"
-			password="root" />
+			connectionURL="jdbc:mysql://192.168.3.113:3306/database_name" userId="user_name"
+			password="user_name" />
 		<javaTypeResolver type="com.xlm.mybatisgenerator.plugin.MyJavaTypeResolver">
 			<property name="forceBigDecimals" value="false"></property>
 		</javaTypeResolver>
 
-		<javaModelGenerator targetPackage="price"
-			targetProject="src/main/resources/mybatisGenerator/java">
+		<javaModelGenerator targetPackage="com.xlm.mybatisgenerator.model"
+			targetProject="src/main/java">
 			<property name="enableSubPackages" value="false" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
 
-		<sqlMapGenerator targetPackage="price"
-			targetProject="src/main/resources/mybatisGenerator/xml">
+		<sqlMapGenerator targetPackage="com.xlm.mybatisgenerator.mapper"
+			targetProject="src/main/resources">
 			<property name="enableSubPackages" value="false" />
 		</sqlMapGenerator>
 
 		<javaClientGenerator type="XMLMAPPER"
-			targetPackage="price" targetProject="src/main/resources/mybatisGenerator/dao">
+			targetPackage="com.xlm.mybatisgenerator.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="false" />
 		</javaClientGenerator>
 
- 		<table tableName="t_competitive_price" domainObjectName="CompetitivePrice" enableCountByExample="false"
+		<table tableName="table_name" domainObjectName="do_name" enableCountByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   enableUpdateByExample="false">
- 		</table>
+		</table>
 
-		<table tableName="t_platform_reference_price_approve_result" domainObjectName="PlatformReferencePriceApproveResult" enableCountByExample="false"
+		<table tableName="table_name" domainObjectName="do_name" enableCountByExample="false"
 			   enableDeleteByExample="false" enableSelectByExample="false"
 			   enableUpdateByExample="false">
 
-		</table>
-		<table tableName="t_platform_reference_price_warn" domainObjectName="PlatformReferencePriceWarn" enableCountByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   enableUpdateByExample="false">
-		</table>
-		<table tableName="t_platform_reference_price_warn_history" domainObjectName="PlatformReferencePriceWarnHistory" enableCountByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   enableUpdateByExample="false">
-		</table>
-		<table tableName="t_reference_price" domainObjectName="ReferencePrice" enableCountByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   enableUpdateByExample="false">
-		</table>
-		<table tableName="t_reference_price_trace" domainObjectName="ReferencePriceTrace" enableCountByExample="false"
-			   enableDeleteByExample="false" enableSelectByExample="false"
-			   enableUpdateByExample="false">
 		</table>
 	</context>
 </generatorConfiguration>
