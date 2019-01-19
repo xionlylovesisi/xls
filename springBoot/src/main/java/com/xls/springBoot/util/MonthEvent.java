@@ -13,7 +13,7 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 /**
- * @author XIXI
+ * @author xls
  *
  */
 @Data
@@ -28,7 +28,7 @@ public class MonthEvent implements Serializable, Comparable<MonthEvent> {
 	private String month;
 	private List<Event> events;
 
-	/*
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)

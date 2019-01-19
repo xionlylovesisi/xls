@@ -19,7 +19,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
- * @author XIXI
+ * @author xls
  *
  */
 public class TaskManager {

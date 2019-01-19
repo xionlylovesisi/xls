@@ -48,7 +48,6 @@ public class XLSUtils {
     /**
      * 读取Excel表格表头的内容
      *
-     * @param InputStream
      * @return String 表头内容的数组
      * @author zengwendong
      */
