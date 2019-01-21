@@ -1,4 +1,4 @@
-package com.xls.springBoot;
+package com.xlm.spring;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

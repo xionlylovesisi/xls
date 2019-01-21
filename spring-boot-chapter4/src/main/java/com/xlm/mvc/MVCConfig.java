@@ -51,21 +51,24 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 		commonsMultipartResolver.setMaxUploadSize(1000000);
 		return commonsMultipartResolver;
 	}
-	/* (non-Javadoc)
+	/**
+	 *  (non-Javadoc)
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addInterceptors(org.springframework.web.servlet.config.annotation.InterceptorRegistry)
 	 */
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(demoInterceptor());
 	}
-	/* (non-Javadoc)
+	/**
+	 *  (non-Javadoc)
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
 	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/assets/");
 	}
-	/* test viewControllers
+	/**
+	 *  test viewControllers
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry)
 	 */
 	@Override
@@ -77,7 +80,8 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 		registry.addViewController("/sse").setViewName("/sse");
 		registry.addViewController("/async").setViewName("/async");
 	}
-	/* test use suffix pattern match false
+	/**
+	 *  test use suffix pattern match false
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#configurePathMatch(org.springframework.web.servlet.config.annotation.PathMatchConfigurer)
 	 */
 	@Override
@@ -87,7 +91,8 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 		configurer.setUseSuffixPatternMatch(Boolean.FALSE);
 	}
 	
-	/* (non-Javadoc)
+	/**
+	 *  (non-Javadoc)
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter#extendMessageConverters(java.util.List)
 	 */
 	@Override

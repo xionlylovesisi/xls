@@ -17,7 +17,8 @@ import org.springframework.web.servlet.DispatcherServlet;
  */
 public class WebInitializer implements WebApplicationInitializer {
 
-	/* (non-Javadoc)
+	/**
+	 *  (non-Javadoc)
 	 * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
 	 */
 	@Override

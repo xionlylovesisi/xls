@@ -1,7 +1,7 @@
 /**
  * 2017年12月4日
  */
-package com.xls.springBoot.util;
+package com.xlm.spring.util;
 
 import java.io.Serializable;
 

@@ -1,7 +1,7 @@
 /**
  * 2017年11月10日
  */
-package com.xls.springBoot.util;
+package com.xlm.spring.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

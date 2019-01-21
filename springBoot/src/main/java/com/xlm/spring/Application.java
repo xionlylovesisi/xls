@@ -1,4 +1,4 @@
-package com.xls.springBoot;
+package com.xlm.spring;
 
 import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
