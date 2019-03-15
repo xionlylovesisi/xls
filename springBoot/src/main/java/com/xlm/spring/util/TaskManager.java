@@ -63,10 +63,10 @@ public class TaskManager {
 		monthEvent.setMonth("2017-12");
 		List<Event> events = new ArrayList<Event>();
 		Event event = new Event();
-		event.setEventName("Account功能分析整理");
-		event.setFinalTime("12-01");
-		event.setActualFinishTime("12-01");
-		event.setCurrentProgress("已初步沟通");
+		event.setEventName("时间名称");
+		event.setFinalTime("事件最终截止完成日期,format:MM-dd");
+		event.setActualFinishTime("时间实际完成日期:format:MM-dd");
+		event.setCurrentProgress("当前进展");
 		event.setRemark("初步整理了功能列表,及系统架构图");
 		events.add(event);
 		monthEvent.setEvents(events);

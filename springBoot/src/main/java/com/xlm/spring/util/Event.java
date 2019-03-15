@@ -43,7 +43,8 @@ public class Event implements Serializable, Comparable<Event> {
 	 * 备注
 	 */
 	private String remark;
-	/* (non-Javadoc)
+	/**
+	 * (non-Javadoc)
 	 * @see java.lang.Comparable#compareTo(java.lang.Object)
 	 */
 	@Override
