@@ -13,6 +13,7 @@
 		<module>spring-boot-chapter3</module>
 		<module>spring-boot-chapter4</module>
 		<module>springBoot</module>
+		<module>distributed-lock</module>
 	</modules>
 
 	<parent>
