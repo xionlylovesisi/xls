@@ -1,12 +1,13 @@
-package com.distributed.lock;
+package com.xlm.cache;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DistributedLock {
+public class CacheApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DistributedLock.class, args);
+        SpringApplication.run(CacheApplication.class, args);
     }
+
 }

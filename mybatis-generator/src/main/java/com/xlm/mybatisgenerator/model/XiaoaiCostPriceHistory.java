@@ -3,7 +3,7 @@ package com.xlm.mybatisgenerator.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class XiaoaiAttachPrice implements Serializable {
+public class XiaoaiCostPriceHistory implements Serializable {
     private Integer id;
 
     private Integer levelId;
@@ -12,9 +12,9 @@ public class XiaoaiAttachPrice implements Serializable {
 
     private Integer productId;
 
-    private Double warrantyPrice;
+    private Integer costPrice;
 
-    private Double valueAdded;
+    private Integer newPriceSource;
 
     private Integer version;
 
@@ -60,20 +60,20 @@ public class XiaoaiAttachPrice implements Serializable {
         this.productId = productId;
     }
 
-    public Double getWarrantyPrice() {
-        return warrantyPrice;
+    public Integer getCostPrice() {
+        return costPrice;
     }
 
-    public void setWarrantyPrice(Double warrantyPrice) {
-        this.warrantyPrice = warrantyPrice;
+    public void setCostPrice(Integer costPrice) {
+        this.costPrice = costPrice;
     }
 
-    public Double getValueAdded() {
-        return valueAdded;
+    public Integer getNewPriceSource() {
+        return newPriceSource;
     }
 
-    public void setValueAdded(Double valueAdded) {
-        this.valueAdded = valueAdded;
+    public void setNewPriceSource(Integer newPriceSource) {
+        this.newPriceSource = newPriceSource;
     }
 
     public Integer getVersion() {
@@ -127,13 +127,13 @@ public class XiaoaiAttachPrice implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        XiaoaiAttachPrice other = (XiaoaiAttachPrice) that;
+        XiaoaiCostPriceHistory other = (XiaoaiCostPriceHistory) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getLevelId() == null ? other.getLevelId() == null : this.getLevelId().equals(other.getLevelId()))
             && (this.getSkuId() == null ? other.getSkuId() == null : this.getSkuId().equals(other.getSkuId()))
             && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-            && (this.getWarrantyPrice() == null ? other.getWarrantyPrice() == null : this.getWarrantyPrice().equals(other.getWarrantyPrice()))
-            && (this.getValueAdded() == null ? other.getValueAdded() == null : this.getValueAdded().equals(other.getValueAdded()))
+            && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
+            && (this.getNewPriceSource() == null ? other.getNewPriceSource() == null : this.getNewPriceSource().equals(other.getNewPriceSource()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getOperatorId() == null ? other.getOperatorId() == null : this.getOperatorId().equals(other.getOperatorId()))
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
@@ -149,8 +149,8 @@ public class XiaoaiAttachPrice implements Serializable {
         result = prime * result + ((getLevelId() == null) ? 0 : getLevelId().hashCode());
         result = prime * result + ((getSkuId() == null) ? 0 : getSkuId().hashCode());
         result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
-        result = prime * result + ((getWarrantyPrice() == null) ? 0 : getWarrantyPrice().hashCode());
-        result = prime * result + ((getValueAdded() == null) ? 0 : getValueAdded().hashCode());
+        result = prime * result + ((getCostPrice() == null) ? 0 : getCostPrice().hashCode());
+        result = prime * result + ((getNewPriceSource() == null) ? 0 : getNewPriceSource().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getOperatorId() == null) ? 0 : getOperatorId().hashCode());
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());

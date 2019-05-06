@@ -7,26 +7,41 @@
         <artifactId>xls</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>distributed-lock</artifactId>
-    <packaging>jar</packaging>
-    <name>distributed-lock</name>
-    <description>distributed-lock</description>
+    <groupId>com.xlm.Stream</groupId>
+    <artifactId>java8-stream</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>java8-stream</name>
+    <description>Demo project for Spring Boot</description>
 
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xlm</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
         </dependency>
     </dependencies>
 
@@ -38,6 +53,5 @@
             </plugin>
         </plugins>
     </build>
-
 
 </project>

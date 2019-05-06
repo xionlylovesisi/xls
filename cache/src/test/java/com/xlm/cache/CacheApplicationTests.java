@@ -1,10 +1,16 @@
-package com.distributed.lock;
+package com.xlm.cache;
 
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class DistributedLock {
+public class CacheApplicationTests {
+
+    @Test
+    public void contextLoads() {
+    }
+
 }
