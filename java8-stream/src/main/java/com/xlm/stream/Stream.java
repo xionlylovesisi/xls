@@ -122,7 +122,8 @@ public class Stream {
 
     public static void reduce() {
         LogUtils.info(log, "--->[reduce]:**INFO**start:{}!", System.currentTimeMillis());
-
+        Integer sumAge = getData().stream().map(PersonModel::getAge).reduce(0, (integer, integer2) -> integer + integer2);
+        LogUtils.info(log, "--->[reduce]:**[INFO]**[sumAge:{}]!", sumAge);
         // 累加,初始化值为10
         Integer reduce = java.util.stream.Stream.of(1, 2, 3, 4).reduce(10, (count, item) -> {
             LogUtils.info(log, "--->[reduce]:**[INFO]**[count:{}]!", count);
@@ -175,7 +176,7 @@ public class Stream {
         LogUtils.info(log, "--->[collect]:**[INFO]**[joining:{}]!", joining);
         // 自定义
         List<String> customize = java.util.stream.Stream.of("1", "2", "3", "4", "5").collect(Collectors.reducing(new ArrayList<>(), o -> {
-            LogUtils.info(log, "--->[collect]:**[INFO]**[mapper:{}]!", o);
+            LogUtils.info(log, "--->[collect]:**[INFO]**[com:{}]!", o);
             return Arrays.asList(o);
         }, (y, z) -> {
             LogUtils.info(log, "--->[collect]:**[INFO]**[binary operator y:{},z:{}]!", JSON.toJSONString(y), JSON.toJSONString(z));

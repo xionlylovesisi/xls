@@ -58,7 +58,6 @@ public class ELConfig {
 			System.out.println(content);
 			System.out.println(environment.getProperty("chapter.author"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

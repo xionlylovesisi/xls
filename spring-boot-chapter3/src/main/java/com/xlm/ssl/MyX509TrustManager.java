@@ -37,7 +37,6 @@ public class MyX509TrustManager implements X509TrustManager,TrustManager {
 	 */
 	@Override
 	public X509Certificate[] getAcceptedIssuers() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

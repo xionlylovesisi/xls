@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlm.springel.mapper.ElExpressionMapper">
+  <resultMap id="BaseResultMap" type="com.xlm.springel.model.ElExpression">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="expression" jdbcType="VARCHAR" property="expression" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, expression
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from el_expression
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from el_expression
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xlm.springel.model.ElExpression">
+    insert into el_expression (id, expression)
+    values (#{id,jdbcType=BIGINT}, #{expression,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xlm.springel.model.ElExpression">
+    insert into el_expression
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="expression != null">
+        expression,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="expression != null">
+        #{expression,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xlm.springel.model.ElExpression">
+    update el_expression
+    <set>
+      <if test="expression != null">
+        expression = #{expression,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xlm.springel.model.ElExpression">
+    update el_expression
+    set expression = #{expression,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

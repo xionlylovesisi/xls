@@ -22,7 +22,7 @@ public class MybatisGeneratorApplication {
         List<String> warnings = new ArrayList<>();
         try {
             String configFilePath = System.getProperty("user.dir")
-                    .concat("/src/main/resources/mybatisGenerator/generatorConfig.xml");
+                    .concat("/mybatis-generator/src/main/resources/mybatisGenerator/generatorConfig.xml");
             System.out.println("加载配置文件===" + configFilePath);
             boolean overwrite = true;
             File configFile = new File(configFilePath);

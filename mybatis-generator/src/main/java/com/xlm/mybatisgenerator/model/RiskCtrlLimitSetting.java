@@ -3,18 +3,16 @@ package com.xlm.mybatisgenerator.model;
 import java.io.Serializable;
 import java.util.Date;
 
-public class XiaoaiCostPriceHistory implements Serializable {
-    private Integer id;
+public class RiskCtrlLimitSetting implements Serializable {
+    private Long id;
 
-    private Integer levelId;
+    private Integer riskCtrlType;
 
-    private Integer skuId;
+    private Integer categoryId;
 
-    private Integer productId;
+    private Integer limitPrice;
 
-    private Integer costPrice;
-
-    private Integer newPriceSource;
+    private Integer isValid;
 
     private Integer version;
 
@@ -28,52 +26,44 @@ public class XiaoaiCostPriceHistory implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public Integer getLevelId() {
-        return levelId;
+    public Integer getRiskCtrlType() {
+        return riskCtrlType;
     }
 
-    public void setLevelId(Integer levelId) {
-        this.levelId = levelId;
+    public void setRiskCtrlType(Integer riskCtrlType) {
+        this.riskCtrlType = riskCtrlType;
     }
 
-    public Integer getSkuId() {
-        return skuId;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setSkuId(Integer skuId) {
-        this.skuId = skuId;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Integer getProductId() {
-        return productId;
+    public Integer getLimitPrice() {
+        return limitPrice;
     }
 
-    public void setProductId(Integer productId) {
-        this.productId = productId;
+    public void setLimitPrice(Integer limitPrice) {
+        this.limitPrice = limitPrice;
     }
 
-    public Integer getCostPrice() {
-        return costPrice;
+    public Integer getIsValid() {
+        return isValid;
     }
 
-    public void setCostPrice(Integer costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    public Integer getNewPriceSource() {
-        return newPriceSource;
-    }
-
-    public void setNewPriceSource(Integer newPriceSource) {
-        this.newPriceSource = newPriceSource;
+    public void setIsValid(Integer isValid) {
+        this.isValid = isValid;
     }
 
     public Integer getVersion() {
@@ -127,13 +117,12 @@ public class XiaoaiCostPriceHistory implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        XiaoaiCostPriceHistory other = (XiaoaiCostPriceHistory) that;
+        RiskCtrlLimitSetting other = (RiskCtrlLimitSetting) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getLevelId() == null ? other.getLevelId() == null : this.getLevelId().equals(other.getLevelId()))
-            && (this.getSkuId() == null ? other.getSkuId() == null : this.getSkuId().equals(other.getSkuId()))
-            && (this.getProductId() == null ? other.getProductId() == null : this.getProductId().equals(other.getProductId()))
-            && (this.getCostPrice() == null ? other.getCostPrice() == null : this.getCostPrice().equals(other.getCostPrice()))
-            && (this.getNewPriceSource() == null ? other.getNewPriceSource() == null : this.getNewPriceSource().equals(other.getNewPriceSource()))
+            && (this.getRiskCtrlType() == null ? other.getRiskCtrlType() == null : this.getRiskCtrlType().equals(other.getRiskCtrlType()))
+            && (this.getCategoryId() == null ? other.getCategoryId() == null : this.getCategoryId().equals(other.getCategoryId()))
+            && (this.getLimitPrice() == null ? other.getLimitPrice() == null : this.getLimitPrice().equals(other.getLimitPrice()))
+            && (this.getIsValid() == null ? other.getIsValid() == null : this.getIsValid().equals(other.getIsValid()))
             && (this.getVersion() == null ? other.getVersion() == null : this.getVersion().equals(other.getVersion()))
             && (this.getOperatorId() == null ? other.getOperatorId() == null : this.getOperatorId().equals(other.getOperatorId()))
             && (this.getCreator() == null ? other.getCreator() == null : this.getCreator().equals(other.getCreator()))
@@ -146,11 +135,10 @@ public class XiaoaiCostPriceHistory implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getLevelId() == null) ? 0 : getLevelId().hashCode());
-        result = prime * result + ((getSkuId() == null) ? 0 : getSkuId().hashCode());
-        result = prime * result + ((getProductId() == null) ? 0 : getProductId().hashCode());
-        result = prime * result + ((getCostPrice() == null) ? 0 : getCostPrice().hashCode());
-        result = prime * result + ((getNewPriceSource() == null) ? 0 : getNewPriceSource().hashCode());
+        result = prime * result + ((getRiskCtrlType() == null) ? 0 : getRiskCtrlType().hashCode());
+        result = prime * result + ((getCategoryId() == null) ? 0 : getCategoryId().hashCode());
+        result = prime * result + ((getLimitPrice() == null) ? 0 : getLimitPrice().hashCode());
+        result = prime * result + ((getIsValid() == null) ? 0 : getIsValid().hashCode());
         result = prime * result + ((getVersion() == null) ? 0 : getVersion().hashCode());
         result = prime * result + ((getOperatorId() == null) ? 0 : getOperatorId().hashCode());
         result = prime * result + ((getCreator() == null) ? 0 : getCreator().hashCode());

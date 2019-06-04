@@ -86,7 +86,6 @@ public class MVCConfig extends WebMvcConfigurerAdapter {
 	 */
 	@Override
 	public void configurePathMatch(PathMatchConfigurer configurer) {
-		// TODO Auto-generated method stub
 		super.configurePathMatch(configurer);
 		configurer.setUseSuffixPatternMatch(Boolean.FALSE);
 	}
