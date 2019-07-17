@@ -19,6 +19,7 @@
 		<module>cache</module>
 		<module>spring-el</module>
 		<module>reactor</module>
+		<module>strategy</module>
 	</modules>
 
 	<parent>
