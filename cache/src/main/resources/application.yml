@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: cache
+  redis:
+    host: localhost
+    port: 6379
+    jedis:
+      pool:
+        max-active: 50
+        max-idle: 50
+        max-wait: 60000
+    timeout: 10000
+    database: 5
+server:
+  servlet:
+    context-path: /cache
+  port: 8080

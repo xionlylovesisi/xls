@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xlm.mybatisgenerator.dao.RiskCtrlLimitSettingMapper">
+  <resultMap id="BaseResultMap" type="com.xlm.mybatisgenerator.model.RiskCtrlLimitSetting">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="risk_ctrl_type" jdbcType="TINYINT" property="riskCtrlType" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="limit_price" jdbcType="INTEGER" property="limitPrice" />
+    <result column="is_valid" jdbcType="TINYINT" property="isValid" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="operator_id" jdbcType="INTEGER" property="operatorId" />
+    <result column="creator" jdbcType="INTEGER" property="creator" />
+    <result column="create_dt" jdbcType="TIMESTAMP" property="createDt" />
+    <result column="update_dt" jdbcType="TIMESTAMP" property="updateDt" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, risk_ctrl_type, category_id, limit_price, is_valid, version, operator_id, creator, 
+    create_dt, update_dt
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_risk_ctrl_limit_setting
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from t_risk_ctrl_limit_setting
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.xlm.mybatisgenerator.model.RiskCtrlLimitSetting">
+    insert into t_risk_ctrl_limit_setting (id, risk_ctrl_type, category_id, 
+      limit_price, is_valid, version, 
+      operator_id, creator, create_dt, 
+      update_dt)
+    values (#{id,jdbcType=BIGINT}, #{riskCtrlType,jdbcType=TINYINT}, #{categoryId,jdbcType=INTEGER}, 
+      #{limitPrice,jdbcType=INTEGER}, #{isValid,jdbcType=TINYINT}, #{version,jdbcType=INTEGER}, 
+      #{operatorId,jdbcType=INTEGER}, #{creator,jdbcType=INTEGER}, #{createDt,jdbcType=TIMESTAMP}, 
+      #{updateDt,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xlm.mybatisgenerator.model.RiskCtrlLimitSetting">
+    insert into t_risk_ctrl_limit_setting
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="riskCtrlType != null">
+        risk_ctrl_type,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="limitPrice != null">
+        limit_price,
+      </if>
+      <if test="isValid != null">
+        is_valid,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="operatorId != null">
+        operator_id,
+      </if>
+      <if test="creator != null">
+        creator,
+      </if>
+      <if test="createDt != null">
+        create_dt,
+      </if>
+      <if test="updateDt != null">
+        update_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="riskCtrlType != null">
+        #{riskCtrlType,jdbcType=TINYINT},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="limitPrice != null">
+        #{limitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null">
+        #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createDt != null">
+        #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDt != null">
+        #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.xlm.mybatisgenerator.model.RiskCtrlLimitSetting">
+    update t_risk_ctrl_limit_setting
+    <set>
+      <if test="riskCtrlType != null">
+        risk_ctrl_type = #{riskCtrlType,jdbcType=TINYINT},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="limitPrice != null">
+        limit_price = #{limitPrice,jdbcType=INTEGER},
+      </if>
+      <if test="isValid != null">
+        is_valid = #{isValid,jdbcType=TINYINT},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="operatorId != null">
+        operator_id = #{operatorId,jdbcType=INTEGER},
+      </if>
+      <if test="creator != null">
+        creator = #{creator,jdbcType=INTEGER},
+      </if>
+      <if test="createDt != null">
+        create_dt = #{createDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDt != null">
+        update_dt = #{updateDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.xlm.mybatisgenerator.model.RiskCtrlLimitSetting">
+    update t_risk_ctrl_limit_setting
+    set risk_ctrl_type = #{riskCtrlType,jdbcType=TINYINT},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      limit_price = #{limitPrice,jdbcType=INTEGER},
+      is_valid = #{isValid,jdbcType=TINYINT},
+      version = #{version,jdbcType=INTEGER},
+      operator_id = #{operatorId,jdbcType=INTEGER},
+      creator = #{creator,jdbcType=INTEGER},
+      create_dt = #{createDt,jdbcType=TIMESTAMP},
+      update_dt = #{updateDt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

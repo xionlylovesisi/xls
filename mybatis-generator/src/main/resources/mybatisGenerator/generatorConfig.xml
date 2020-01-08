@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<property name="autoDelimitKeywords" value="true" />
+		<property name="beginningDelimiter" value="`" />
+		<property name="endingDelimiter" value="`" />
+
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+		<!-- 注释 -->
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" /><!-- 是否取消注释 -->
+			<property name="suppressDate" value="false" /> <!-- 是否生成注释代时间戳 -->
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.3.113:3306/database_name" userId="user_name"
+			password="user_name" />
+		<javaTypeResolver type="com.xlm.mybatisgenerator.plugin.MyJavaTypeResolver">
+			<property name="forceBigDecimals" value="false"></property>
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.xlm.mybatisgenerator.model"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.xlm.mybatisgenerator.mapper"
+			targetProject="src/main/resources">
+			<property name="enableSubPackages" value="false" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.xlm.mybatisgenerator.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table tableName="table_name" domainObjectName="do_name" enableCountByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   enableUpdateByExample="false">
+		</table>
+
+		<table tableName="table_name" domainObjectName="do_name" enableCountByExample="false"
+			   enableDeleteByExample="false" enableSelectByExample="false"
+			   enableUpdateByExample="false">
+
+		</table>
+	</context>
+</generatorConfiguration>
