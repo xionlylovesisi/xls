@@ -24,11 +24,16 @@ public class ReverseIteration {
         ListNode curr = head;
         ListNode pre = null;
         while (curr != null) {
+            //临时保存当前节点的next节点
             ListNode next = curr.next;
+            //当前节点的next指向上一次循环的节点
             curr.next = pre;
+            //当前节点在下次循环的时候就是前一个节点
             pre = curr;
+            // 下次循环的当前节点就是当前循环的当前节点的下一个节点
             curr = next;
         }
+        //到最后一次循环结束,也就是当前节点为空的时候,那么这个时候pre节点就是新链表的头结点
         return pre;
     }
 

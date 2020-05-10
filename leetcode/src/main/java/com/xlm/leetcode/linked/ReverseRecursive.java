@@ -22,7 +22,6 @@ public class ReverseRecursive {
         if (head.next == null) {
             return head;
         }
-        //next
         ListNode newHead = reverseRecursive(head.next);
         head.next.next = head;
         head.next = null;
