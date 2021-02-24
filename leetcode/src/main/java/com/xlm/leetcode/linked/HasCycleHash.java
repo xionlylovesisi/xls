@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 链表是否有环(hash方式)
  * @author xls
  * @date 2019-12-11
  * @description

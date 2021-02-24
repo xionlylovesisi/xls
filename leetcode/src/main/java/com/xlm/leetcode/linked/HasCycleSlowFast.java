@@ -1,6 +1,7 @@
 package com.xlm.leetcode.linked;
 
 /**
+ * 链表是否有环(快慢指针方式)
  * @author xls
  * @date 2019-12-11
  * @description

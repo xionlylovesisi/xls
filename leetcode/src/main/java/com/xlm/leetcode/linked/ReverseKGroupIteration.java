@@ -1,6 +1,7 @@
 package com.xlm.leetcode.linked;
 
 /**
+ * k个为一组反转链表(迭代方式)
  * @author xls
  * @date 2019-12-12
  * @description

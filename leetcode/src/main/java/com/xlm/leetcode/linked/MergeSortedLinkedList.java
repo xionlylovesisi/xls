@@ -54,22 +54,22 @@ public class MergeSortedLinkedList {
         prev.next = first != null ? first : second;
         return newHeader.next;
     }
+    static class ListNode {
+        int val;
+        ListNode next;
 
-}
+        ListNode() {
+        }
 
-class ListNode {
-    int val;
-    ListNode next;
+        ListNode(int val) {
+            this.val = val;
+        }
 
-    ListNode() {
-    }
-
-    ListNode(int val) {
-        this.val = val;
-    }
-
-    ListNode(int val, ListNode next) {
-        this.val = val;
-        this.next = next;
+        ListNode(int val, ListNode next) {
+            this.val = val;
+            this.next = next;
+        }
     }
 }
+
+
