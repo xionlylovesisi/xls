@@ -37,7 +37,7 @@ public class LinkedListCycle {
         first.next = new ListNode(2);
         first.next.next = new ListNode(3);
         first.next.next.next = new ListNode(2, first.next);
-        System.out.println(hasCycle(first, 2));
+        System.out.println(hasCycle(first, 1));
     }
 
     /**
@@ -52,15 +52,16 @@ public class LinkedListCycle {
         switch (model) {
             case 1:
                 //hash
-                Set<ListNode> existsNode = new HashSet<>();
-                while (head != null) {
-                    if (!existsNode.add(head)) {
+                Set<ListNode> hasMarked = new HashSet<>();
+                while (head != null){
+                    if (!hasMarked.add(head)) {
                         return true;
                     }
                     head = head.next;
                 }
                 return false;
             case 2:
+                // 快慢指针
                 ListNode fast = head;
                 ListNode slow = head;
                 while (fast != null && fast.next != null) {

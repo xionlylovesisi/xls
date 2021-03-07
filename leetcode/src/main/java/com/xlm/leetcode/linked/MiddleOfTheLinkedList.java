@@ -56,52 +56,49 @@ public class MiddleOfTheLinkedList {
             case 1:
                 // 借助ArrayList
                 List<ListNode> temporary = new ArrayList<>();
-                ListNode curr = head;
-                while (curr != null) {
-                    temporary.add(curr);
-                    curr = curr.next;
+                while (head != null){
+                    temporary.add(head);
+                    head = head.next;
                 }
-                int temporarySize = temporary.size();
-                // 两个中间节点的时候,取后一个中间节点,由于数组下标从0开始,不需要+1;
-                // "/"在无法被整除时会自动向下取整,由于数组下标从0开始,不需要+1;
-                int resultIndex = temporarySize / 2;
-                return temporary.get(resultIndex);
+                // 当链表长度为偶数时(即有两个中间节点),取后一个节点,此处本应该+1,但是由于数组的下标从0开始,所以此处不需要+1
+                // 当链表长度为奇数时,"/"操作符自动向下取整,此处也应该+1,但是由于数组的下标从0开始,所以此处不需要+1
+                return temporary.get(temporary.size() / 2);
             case 2:
                 // 通过获取链表长度
-                int middleIndex = getMiddleIndex(head);
-                int currentIndex = 0;
-                while (head != null) {
-                    currentIndex++;
-                    if (currentIndex == middleIndex) {
+                int len = getLinkedListLen(head);
+                // 此处取中间节点索引的方法为了与数组保持一致,所以链表的索引页从0开始
+                int curr = 0;
+                int middleIndex = len/2;
+                while (head != null){
+                    if (middleIndex == curr) {
                         return head;
                     }
+                    curr++;
                     head = head.next;
                 }
                 return null;
             case 3:
+                // 快慢指针
                 ListNode fast = head;
                 ListNode slow = head;
-                while (fast != null && fast.next!=null){
+                while (fast != null && fast.next != null){
                     fast = fast.next.next;
                     slow = slow.next;
                 }
-                return  slow;
+                return slow;
             default:
                 return head;
         }
 
     }
 
-    private static int getMiddleIndex(ListNode first) {
-        ListNode curr = first;
+    private static int getLinkedListLen(ListNode head) {
         int len = 0;
-        while (curr != null) {
+        while (head != null){
             len++;
-            curr = curr.next;
+            head = head.next;
         }
-        // 两个中间节点的时候,取后一个中间节点,由于数组下标从1开始,需要+1;
-        // "/"在无法被整除时会自动向下取整,由于数组下标从1开始,需要+1;
-        return len / 2 + 1;
+        return len;
     }
 
     static class ListNode {
