@@ -25,7 +25,7 @@ public class SortLinkedList {
         first.next.next.next = new ListNode(6);
         first.next.next.next.next = new ListNode(5);
         first.next.next.next.next.next = new ListNode(2);
-        ListNode listNode = sortList(first, 1);
+        ListNode listNode = sortList(first, 2);
         printLinked(listNode);
     }
 
@@ -48,7 +48,43 @@ public class SortLinkedList {
                 return recursiveSortList(head);
             case 2:
                 // 自底向上迭代归并排序
-                return null;
+                // 获取链表的length
+                // 定义子链表长度subLength初始化为1
+                // 长度为1的链表本身就是有序的,利用合并有序链表的方法合并相邻的两个子链表
+                // 合并之后会得到一个subLength*2的有序链表,
+                // 对链表剩余的节点执行上面两部操作,得到每subLength*2个节点有序的链表
+                // 将subLength*2继续上面的步骤,知道subLength>链表的length
+                int totalLength = getLength(head);
+
+                ListNode dummyHead = new ListNode(-1, head);
+                for (int i = 1; i < totalLength; i = i << 2) {
+                    ListNode prev = dummyHead;
+                    ListNode curr = dummyHead.next;
+                    while (curr != null) {
+                        ListNode node1 = curr;
+                        for (int j = 1; j < i && curr != null; j++) {
+                            curr = curr.next;
+                        }
+                        ListNode node2 = curr.next;
+                        curr.next = null;
+                        curr = node2;
+                        for (int j = 1; j < i && curr != null; j++) {
+                            curr = curr.next;
+                        }
+                        ListNode next = null;
+                        if (curr != null) {
+                            next = curr.next;
+                            curr.next = null;
+                        }
+                        curr = next;
+                        ListNode sortedListNode = mergeSortedLinkedList(node1, node2);
+                        prev.next = sortedListNode;
+                        while (prev.next != null) {
+                            prev = prev.next;
+                        }
+                    }
+                }
+                return dummyHead.next;
             default:
                 return null;
         }
