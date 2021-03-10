@@ -48,37 +48,37 @@ public class SortLinkedList {
                 return recursiveSortList(head);
             case 2:
                 // 自底向上迭代归并排序
-                // 获取链表的length
-                // 定义子链表长度subLength初始化为1
-                // 长度为1的链表本身就是有序的,利用合并有序链表的方法合并相邻的两个子链表
-                // 合并之后会得到一个subLength*2的有序链表,
-                // 对链表剩余的节点执行上面两部操作,得到每subLength*2个节点有序的链表
+                // 获取链表的length,创建临时头结点
+                // 定义子链表长度subLength初始化为1,长度为1的链表本身就是有序的
+                // 进行迭代,每迭代一次 subLength便增加一倍,终止条件为subLength>链表的长度
+                // 将链表中subLength个节点的子链表,两两进行合并,便得到一组subLength*2个节点的有序链表
+                // 上面这一步有一个边界:如果要合并的第二个子链表长度<subLength,在遍历分割的时候可能会出现空指针,注意判断
+                // 重复上面的动作,知道subLength>链表长度
                 // 将subLength*2继续上面的步骤,知道subLength>链表的length
-                int totalLength = getLength(head);
-
+                int length = getLength(head);
                 ListNode dummyHead = new ListNode(-1, head);
-                for (int i = 1; i < totalLength; i = i << 2) {
+                for (int subLength = 1; subLength < length; subLength <<= 1) {
                     ListNode prev = dummyHead;
-                    ListNode curr = dummyHead.next;
+                    ListNode curr = prev.next;
                     while (curr != null) {
-                        ListNode node1 = curr;
-                        for (int j = 1; j < i && curr != null; j++) {
+                        ListNode head1 = curr;
+                        for (int i = 1; i < subLength && curr != null && curr.next != null; i++) {
                             curr = curr.next;
                         }
-                        ListNode node2 = curr.next;
+                        ListNode head2 = curr.next;
                         curr.next = null;
-                        curr = node2;
-                        for (int j = 1; j < i && curr != null; j++) {
+                        curr = head2;
+                        for (int i = 1; i < subLength && curr != null; i++) {
                             curr = curr.next;
                         }
                         ListNode next = null;
                         if (curr != null) {
                             next = curr.next;
                             curr.next = null;
+                            curr = next;
                         }
-                        curr = next;
-                        ListNode sortedListNode = mergeSortedLinkedList(node1, node2);
-                        prev.next = sortedListNode;
+                        ListNode mergeSortedLinkedList = mergeSortedLinkedList(head1, head2);
+                        prev.next = mergeSortedLinkedList;
                         while (prev.next != null) {
                             prev = prev.next;
                         }
