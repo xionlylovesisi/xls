@@ -27,17 +27,7 @@ package com.xlm.leetcode.linked;
  */
 public class ReverseNodesInKGroup {
     public static void main(String[] args) {
-        ListNode listNode = new ListNode();
-        ListNode current = listNode;
-        int len = 6;
-        for (int i = 1; i <= len; i++) {
-            current.val = i;
-            if (len == i) {
-                break;
-            }
-            current.next = new ListNode();
-            current = current.next;
-        }
+        ListNode listNode = ListNode.getSortedListNode(6);
         ListNode reverse = reverseKGroup(listNode, 3, 2);
         while (reverse != null) {
             System.out.println(reverse.val);
@@ -123,20 +113,4 @@ public class ReverseNodesInKGroup {
         return newHead;
     }
 
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
-    }
 }

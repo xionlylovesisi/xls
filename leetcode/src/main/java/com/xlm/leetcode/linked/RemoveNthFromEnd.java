@@ -17,17 +17,7 @@ import java.util.Stack;
  */
 public class RemoveNthFromEnd {
     public static void main(String[] args) {
-        ListNode head = new ListNode();
-        ListNode current = head;
-        int len = 5;
-        for (int i = 1; i <= len; i++) {
-            current.val = i;
-            if (len == i) {
-                break;
-            }
-            current.next = new ListNode();
-            current = current.next;
-        }
+        ListNode head = ListNode.getSortedListNode(5);
         ListNode listNode = removeNthFromEnd(head, 5, 5);
         while (listNode != null) {
             System.out.println(listNode.val);
@@ -144,22 +134,5 @@ public class RemoveNthFromEnd {
             head = head.next;
         }
         return len;
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }

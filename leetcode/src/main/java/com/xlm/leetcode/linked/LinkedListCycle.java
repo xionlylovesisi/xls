@@ -53,7 +53,7 @@ public class LinkedListCycle {
             case 1:
                 //hash
                 Set<ListNode> hasMarked = new HashSet<>();
-                while (head != null){
+                while (head != null) {
                     if (!hasMarked.add(head)) {
                         return true;
                     }
@@ -74,23 +74,6 @@ public class LinkedListCycle {
                 return false;
             default:
                 return false;
-        }
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
         }
     }
 }

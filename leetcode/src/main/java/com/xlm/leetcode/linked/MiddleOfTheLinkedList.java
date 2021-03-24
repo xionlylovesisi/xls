@@ -3,6 +3,8 @@ package com.xlm.leetcode.linked;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.xlm.leetcode.linked.ListNode.getSortedListNode;
+
 /**
  * 876. 链表的中间结点
  * 给定一个头结点为 head 的非空单链表，返回链表的中间结点。
@@ -25,17 +27,7 @@ import java.util.List;
  */
 public class MiddleOfTheLinkedList {
     public static void main(String[] args) {
-        ListNode first = new ListNode();
-        ListNode current = first;
-        int len = 6;
-        for (int i = 1; i <= len; i++) {
-            current.val = i;
-            if (len == i) {
-                break;
-            }
-            current.next = new ListNode();
-            current = current.next;
-        }
+        ListNode first = getSortedListNode(6);
         ListNode middleNode = middleNode(first, 3);
         while (middleNode != null) {
             System.out.println(middleNode.val);
@@ -56,7 +48,7 @@ public class MiddleOfTheLinkedList {
             case 1:
                 // 借助ArrayList
                 List<ListNode> temporary = new ArrayList<>();
-                while (head != null){
+                while (head != null) {
                     temporary.add(head);
                     head = head.next;
                 }
@@ -68,8 +60,8 @@ public class MiddleOfTheLinkedList {
                 int len = getLinkedListLen(head);
                 // 此处取中间节点索引的方法为了与数组保持一致,所以链表的索引页从0开始
                 int curr = 0;
-                int middleIndex = len/2;
-                while (head != null){
+                int middleIndex = len / 2;
+                while (head != null) {
                     if (middleIndex == curr) {
                         return head;
                     }
@@ -81,7 +73,7 @@ public class MiddleOfTheLinkedList {
                 // 快慢指针
                 ListNode fast = head;
                 ListNode slow = head;
-                while (fast != null && fast.next != null){
+                while (fast != null && fast.next != null) {
                     fast = fast.next.next;
                     slow = slow.next;
                 }
@@ -94,27 +86,10 @@ public class MiddleOfTheLinkedList {
 
     private static int getLinkedListLen(ListNode head) {
         int len = 0;
-        while (head != null){
+        while (head != null) {
             len++;
             head = head.next;
         }
         return len;
-    }
-
-    static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode() {
-        }
-
-        ListNode(int val) {
-            this.val = val;
-        }
-
-        ListNode(int val, ListNode next) {
-            this.val = val;
-            this.next = next;
-        }
     }
 }
