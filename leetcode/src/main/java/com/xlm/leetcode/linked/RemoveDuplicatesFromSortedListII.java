@@ -29,9 +29,15 @@ public class RemoveDuplicatesFromSortedListII {
         first.next.next = new ListNode(2);
         first.next.next.next = new ListNode(3);
         first.next.next.next.next = new ListNode(4);
-        ListNode.print(deleteDuplicates(first, 1));
+        ListNode.print(deleteDuplicates(first, 2));
     }
 
+    /**
+     *
+     * @param head
+     * @param model 1:迭代,2:递归
+     * @return
+     */
     public static ListNode deleteDuplicates(ListNode head, int model) {
         if (head == null || head.next == null) {
             return head;
@@ -62,8 +68,26 @@ public class RemoveDuplicatesFromSortedListII {
                 }
                 prev.next = null;
                 return dummy.next;
+            case 2:
+                //递归
+                return deleteDuplicatesRecursive(head);
             default:
                 return null;
+        }
+    }
+
+    private static ListNode deleteDuplicatesRecursive(ListNode head) {
+        if (head == null || head.next == null) {
+            return head;
+        }
+        if (head.val == head.next.val) {
+            while (head.next != null && head.val == head.next.val) {
+                head = head.next;
+            }
+            return deleteDuplicatesRecursive(head.next);
+        } else {
+            head.next = deleteDuplicatesRecursive(head.next);
+            return head;
         }
     }
 }
