@@ -29,10 +29,7 @@ public class MiddleOfTheLinkedList {
     public static void main(String[] args) {
         ListNode first = getSortedListNode(6);
         ListNode middleNode = middleNode(first, 3);
-        while (middleNode != null) {
-            System.out.println(middleNode.val);
-            middleNode = middleNode.next;
-        }
+        ListNode.print(middleNode);
     }
 
     /**
