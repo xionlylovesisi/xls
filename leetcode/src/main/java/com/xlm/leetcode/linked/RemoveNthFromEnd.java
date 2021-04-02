@@ -18,7 +18,7 @@ import java.util.Stack;
 public class RemoveNthFromEnd {
     public static void main(String[] args) {
         ListNode head = ListNode.getSortedListNode(5);
-        ListNode listNode = removeNthFromEnd(head, 5, 5);
+        ListNode listNode = removeNthFromEnd(head, 2, 5);
         while (listNode != null) {
             System.out.println(listNode.val);
             listNode = listNode.next;
@@ -38,89 +38,85 @@ public class RemoveNthFromEnd {
         switch (model) {
             case 1:
                 // 获取长度
-                ListNode dummy1 = new ListNode(-1, head);
+                ListNode getLengthDummy = new ListNode(-1,head);
                 int length = getLength(head);
-                // 要删除的节点不存在
                 if (n > length) {
                     return head;
                 }
+                int currentIndex = 0;
                 int prevIndex = length - n;
-                ListNode curr = dummy1;
-                int iterateIndex = 0;
-                while (curr != null) {
-                    if (iterateIndex == prevIndex) {
-                        curr.next = curr.next.next;
+                ListNode getLengthCurr = getLengthDummy;
+                while (getLengthCurr != null){
+                    if (prevIndex == currentIndex) {
+                        getLengthCurr.next = getLengthCurr.next.next;
                         break;
                     }
-                    iterateIndex++;
-                    curr = curr.next;
+                    getLengthCurr = getLengthCurr.next;
+                    currentIndex++;
                 }
-                return dummy1.next;
+                return getLengthDummy.next;
             case 2:
                 // 借助其它数据结构,数组;
-                ListNode dummy2 = new ListNode(-1, head);
-                List<ListNode> temporary = new ArrayList<>();
-                ListNode curr2 = dummy2;
-                while (curr2 != null) {
-                    temporary.add(curr2);
-                    curr2 = curr2.next;
+                ListNode arrayDummy = new ListNode(-1,head);
+                ListNode arrayCurr = arrayDummy;
+                List<ListNode> listNodeList = new ArrayList<>();
+                while (arrayCurr!=null){
+                    listNodeList.add(arrayCurr);
+                    arrayCurr = arrayCurr.next;
                 }
-                int len = temporary.size();
-                if (len - 1 < n) {
+                int size = listNodeList.size();
+                if (size - 1 < n) {
                     return head;
                 }
-                int waitRemovedPrevIndex = len - n - 1;
-                ListNode prevNode = temporary.get(waitRemovedPrevIndex);
-                prevNode.next = prevNode.next.next;
-                return dummy2.next;
+                ListNode prev = listNodeList.get(size - n - 1);
+                prev.next = prev.next.next;
+                return arrayDummy.next;
             case 3:
                 // 双指针
-                ListNode dummy3 = new ListNode(-1, head);
-                ListNode first = dummy3;
-                ListNode second = dummy3;
+                ListNode doublePointDummy = new ListNode(-1,head);
+                ListNode fast = doublePointDummy;
+                ListNode slow = doublePointDummy;
                 for (int i = 0; i < n; i++) {
-                    first = first.next;
+                    fast = fast.next;
                 }
-                while (first.next != null) {
-                    first = first.next;
-                    second = second.next;
+                while (fast.next != null){
+                    fast = fast.next;
+                    slow = slow.next;
                 }
-                second.next = second.next.next;
-                return dummy3.next;
+                slow.next = slow.next.next;
+                return doublePointDummy.next;
             case 4:
                 // 双指针 一遍循环
-                ListNode dummy4 = new ListNode(-1, head);
-                ListNode first4 = dummy4;
-                ListNode second4 = dummy4;
-                while (first4.next != null) {
-                    if (n > 0) {
-                        first4 = first4.next;
-                        n--;
+                ListNode doublePoint1IterDummy = new ListNode(-1,head);
+                ListNode doublePoint1IterFast = doublePoint1IterDummy;
+                ListNode doublePoint1IterSlow = doublePoint1IterDummy;
+                int i = 0;
+                while (doublePoint1IterFast.next != null) {
+                    if (i < n){
+                        doublePoint1IterFast = doublePoint1IterFast.next;
+                        i++;
                         continue;
                     }
-                    first4 = first4.next;
-                    second4 = second4.next;
+                    doublePoint1IterFast = doublePoint1IterFast.next;
+                    doublePoint1IterSlow = doublePoint1IterSlow.next;
                 }
-                second4.next = second4.next.next;
-                return dummy4.next;
+                doublePoint1IterSlow.next = doublePoint1IterSlow.next.next;
+                return doublePoint1IterDummy.next;
             case 5:
                 // 借助其它数据结构,栈;
-                ListNode dummy5 = new ListNode(-1, head);
-                Stack<ListNode> temporary5 = new Stack<>();
-                ListNode curr5 = dummy5;
-                while (curr5 != null) {
-                    temporary5.push(curr5);
-                    curr5 = curr5.next;
+                ListNode stackDummy = new ListNode(-1,head);
+                Stack<ListNode> stack = new Stack<>();
+                ListNode stackCurr = stackDummy;
+                while (stackCurr != null) {
+                    stack.push(stackCurr);
+                    stackCurr = stackCurr.next;
                 }
-                if (temporary5.size() - 1 < n) {
-                    return head;
+                for (int j = 0; j < n; j++) {
+                    stack.pop();
                 }
-                for (int i = 0; i < n; i++) {
-                    temporary5.pop();
-                }
-                ListNode waitRemovedPrevNode = temporary5.peek();
-                waitRemovedPrevNode.next = waitRemovedPrevNode.next.next;
-                return dummy5.next;
+                ListNode stackPrev = stack.peek();
+                stackPrev.next = stackPrev.next.next;
+                return stackDummy.next;
             default:
                 break;
         }
