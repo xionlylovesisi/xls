@@ -12,77 +12,66 @@ package com.xlm.leetcode.linked;
  */
 public class MergeSortedLinkedList {
     public static void main(String[] args) {
-        ListNode first = new ListNode(1);
-        first.next = new ListNode(2);
-        first.next.next = new ListNode(4);
-        ListNode second = new ListNode(1);
-        second.next = new ListNode(3);
-        second.next.next = new ListNode(4);
-        ListNode merged = mergeSortedLinked(first, second, 2);
-        printLinked(merged);
+
+        ListNode first = ListNode.getSortedListNode(3);
+        ListNode second = ListNode.getSortedListNode(3);
+        ListNode.print(mergeSortedLinked(first, second, 2));
     }
 
     /**
      * 合并两个有序链表
      *
-     * @param first
-     * @param second
-     * @param model  1:迭代;2:递归.
+     * @param l1
+     * @param l2
+     * @param model 1:迭代;2:递归.
      * @return
      */
-    private static ListNode mergeSortedLinked(ListNode first, ListNode second, int model) {
-        if (first == null) {
-            return second;
+    private static ListNode mergeSortedLinked(ListNode l1, ListNode l2, int model) {
+        if (l1 == null) {
+            return l2;
         }
-        if (second == null) {
-            return first;
+        if (l2 == null) {
+            return l1;
         }
         switch (model) {
             case 1:
                 // 迭代
                 ListNode dummy = new ListNode(-1);
-                ListNode current = dummy;
-                while (first != null && second != null) {
-                    if (first.val <= second.val) {
-                        current.next = first;
-                        current = current.next;
-                        first = first.next;
+                ListNode curr = dummy;
+                while (l1 != null && l2 != null) {
+                    if (l1.val < l2.val) {
+                        curr.next = l1;
+                        curr = curr.next;
+                        l1 = l1.next;
                     } else {
-                        current.next = second;
-                        current = current.next;
-                        second = second.next;
+                        curr.next = l2;
+                        curr = curr.next;
+                        l2 = l2.next;
                     }
                 }
-                current.next = first != null ? first : second;
+                curr.next = l1 != null ? l1 : l2;
                 return dummy.next;
             case 2:
                 // 递归
-                return recursiveMerge(first, second);
+                return mergeSortedLinkedRecursive(l1, l2);
             default:
                 return null;
         }
     }
 
-    private static ListNode recursiveMerge(ListNode first, ListNode second) {
-        if (first == null) {
-            return second;
+    private static ListNode mergeSortedLinkedRecursive(ListNode l1, ListNode l2) {
+        if (l1 == null) {
+            return l2;
         }
-        if (second == null) {
-            return first;
+        if (l2 == null) {
+            return l1;
         }
-        if (first.val <= second.val) {
-            first.next = recursiveMerge(first.next, second);
-            return first;
+        if (l1.val < l2.val) {
+            l1.next = mergeSortedLinkedRecursive(l1.next, l2);
+            return l1;
         } else {
-            second.next = recursiveMerge(first, second.next);
-            return second;
-        }
-    }
-
-    private static void printLinked(ListNode merged) {
-        while (merged != null) {
-            System.out.println(merged.val);
-            merged = merged.next;
+            l2.next = mergeSortedLinkedRecursive(l1, l2.next);
+            return l2;
         }
     }
 }
