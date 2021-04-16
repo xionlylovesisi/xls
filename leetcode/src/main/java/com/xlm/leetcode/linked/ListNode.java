@@ -1,5 +1,7 @@
 package com.xlm.leetcode.linked;
 
+import java.util.Random;
+
 /**
  * @author mcx
  * @date 2021/3/23
@@ -32,6 +34,28 @@ public class ListNode {
             current = current.next;
         }
         return first;
+    }
+
+    public static ListNode getUnsortedListNode(int len) {
+        Random random = new Random();
+        ListNode first = new ListNode();
+        ListNode current = first;
+        for (int i = 1; i <= len; i++) {
+            current.val = random.nextInt(len);
+            if (len == i) {
+                break;
+            }
+            current.next = new ListNode();
+            current = current.next;
+        }
+        return first;
+    }
+
+    public static ListNode getLastListNode(ListNode head) {
+        while (head.next != null) {
+            head = head.next;
+        }
+        return head;
     }
 
     public static void print(ListNode head) {

@@ -49,30 +49,26 @@ public class MiddleOfTheLinkedList {
                     temporary.add(head);
                     head = head.next;
                 }
-                // 当链表长度为偶数时(即有两个中间节点),取后一个节点,此处本应该+1,但是由于数组的下标从0开始,所以此处不需要+1
-                // 当链表长度为奇数时,"/"操作符自动向下取整,此处也应该+1,但是由于数组的下标从0开始,所以此处不需要+1
                 return temporary.get(temporary.size() / 2);
             case 2:
                 // 通过获取链表长度
-                int len = getLinkedListLen(head);
-                // 此处取中间节点索引的方法为了与数组保持一致,所以链表的索引页从0开始
-                int curr = 0;
-                int middleIndex = len / 2;
+                int linkedListLen = getLinkedListLen(head);
+                int midIndex = linkedListLen / 2;
+                int index = 0;
                 while (head != null) {
-                    if (middleIndex == curr) {
-                        return head;
+                    if (midIndex == index) {
+                        break;
                     }
-                    curr++;
                     head = head.next;
+                    index++;
                 }
-                return null;
+                return head;
             case 3:
                 // 快慢指针
-                ListNode fast = head;
-                ListNode slow = head;
+                ListNode fast = head, slow = head;
                 while (fast != null && fast.next != null) {
-                    fast = fast.next.next;
                     slow = slow.next;
+                    fast = fast.next.next;
                 }
                 return slow;
             default:
