@@ -25,15 +25,7 @@ public class SortLinkedList {
         first.next.next.next = new ListNode(6);
         first.next.next.next.next = new ListNode(5);
         first.next.next.next.next.next = new ListNode(2);
-        ListNode listNode = sortList(first, 2);
-        printLinked(listNode);
-    }
-
-    private static void printLinked(ListNode merged) {
-        while (merged != null) {
-            System.out.println(merged.val);
-            merged = merged.next;
-        }
+        ListNode.print(sortList(first, 1));
     }
 
     /**
@@ -48,43 +40,38 @@ public class SortLinkedList {
                 return recursiveSortList(head);
             case 2:
                 // 自底向上迭代归并排序
-                // 获取链表的length,创建临时头结点
-                // 定义子链表长度subLength初始化为1,长度为1的链表本身就是有序的
-                // 进行迭代,每迭代一次 subLength便增加一倍,终止条件为subLength>链表的长度
-                // 将链表中subLength个节点的子链表,两两进行合并,便得到一组subLength*2个节点的有序链表
-                // 上面这一步有一个边界:如果要合并的第二个子链表长度<subLength,在遍历分割的时候可能会出现空指针,注意判断
-                // 重复上面的动作,知道subLength>链表长度
-                // 将subLength*2继续上面的步骤,知道subLength>链表的length
+                ListNode dummy = new ListNode(-1, head);
                 int length = getLength(head);
-                ListNode dummyHead = new ListNode(-1, head);
-                for (int subLength = 1; subLength < length; subLength <<= 1) {
-                    ListNode prev = dummyHead;
-                    ListNode curr = prev.next;
-                    while (curr != null) {
-                        ListNode head1 = curr;
-                        for (int i = 1; i < subLength && curr != null && curr.next != null; i++) {
-                            curr = curr.next;
+                for (int i = 1; i < length; i <<= 1) {
+                    ListNode preTail = dummy;
+                    head = dummy.next;
+                    while (head != null) {
+                        ListNode first = head;
+                        for (int j = 1; j < i && head != null; j++) {
+                            head = head.next;
                         }
-                        ListNode head2 = curr.next;
-                        curr.next = null;
-                        curr = head2;
-                        for (int i = 1; i < subLength && curr != null; i++) {
-                            curr = curr.next;
+                        if (head == null) {
+                            preTail.next = first;
+                            break;
                         }
-                        ListNode next = null;
-                        if (curr != null) {
-                            next = curr.next;
-                            curr.next = null;
-                            curr = next;
+                        ListNode second = head.next;
+                        head.next = null;
+                        head = second;
+                        for (int j = 1; j < i && head != null; j++) {
+                            head = head.next;
                         }
-                        ListNode mergeSortedLinkedList = mergeSortedLinkedList(head1, head2);
-                        prev.next = mergeSortedLinkedList;
-                        while (prev.next != null) {
-                            prev = prev.next;
+                        if (head != null) {
+                            ListNode next = head.next;
+                            head.next = null;
+                            head = next;
+                        }
+                        preTail.next = mergeSortedLinkedList(first, second);
+                        while (preTail.next != null) {
+                            preTail = preTail.next;
                         }
                     }
                 }
-                return dummyHead.next;
+                return dummy.next;
             default:
                 return null;
         }
@@ -100,11 +87,11 @@ public class SortLinkedList {
             fast = fast.next.next;
             slow = slow.next;
         }
-        ListNode nextHead = slow.next;
+        ListNode secondHead = slow.next;
         slow.next = null;
-        ListNode listNode1 = recursiveSortList(head);
-        ListNode listNode2 = recursiveSortList(nextHead);
-        return mergeSortedLinkedList(listNode1, listNode2);
+        ListNode first = recursiveSortList(head);
+        ListNode second = recursiveSortList(secondHead);
+        return mergeSortedLinkedList(first, second);
     }
 
     private static ListNode mergeSortedLinkedList(ListNode listNode1, ListNode listNode2) {
