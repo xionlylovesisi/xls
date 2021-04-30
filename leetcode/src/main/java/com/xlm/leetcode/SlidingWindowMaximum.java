@@ -34,7 +34,7 @@ import java.util.PriorityQueue;
  */
 public class SlidingWindowMaximum {
     public static void main(String[] args) {
-        int[] nums = {1, 3, -1, -3, 5, 3, 6, 7};
+        int[] nums = {1,3,-1,-3,5,3,6,7};
         int k = 3;
         int[] result = maxSlidingWindow(nums, k, 3);
         System.out.println(Arrays.toString(result));
@@ -50,65 +50,68 @@ public class SlidingWindowMaximum {
         int n = nums.length;
         switch (model) {
             case 1:
-                PriorityQueue<int[]> window = new PriorityQueue<>((num1, num2) -> num1[0] != num2[0] ? num2[0] - num1[0] : num2[1] - num1[1]);
+                //优先队列
+                PriorityQueue<int[]> priorityQueue = new PriorityQueue<int[]>((ints, t1) -> {
+                    return ints[0] == t1[0] ? t1[1] - ints[1] : t1[0] - ints[0];
+                });
                 for (int i = 0; i < k; i++) {
-                    window.add(new int[]{nums[i], i});
+                    priorityQueue.add(new int[]{nums[i], i});
                 }
-                int[] priorityQueueResult = new int[n - k + 1];
-                priorityQueueResult[0] = window.peek()[0];
+                int[] result = new int[n - k + 1];
+                result[0] = priorityQueue.peek()[0];
                 for (int i = k; i < n; i++) {
-                    window.add(new int[]{nums[i], i});
-                    while (window.peek()[1] <= i - k) {
-                        window.poll();
+                    while (!priorityQueue.isEmpty() && priorityQueue.peek()[1] <= i - k) {
+                        priorityQueue.poll();
                     }
-                    priorityQueueResult[i - k + 1] = window.peek()[0];
+                    priorityQueue.add(new int[]{nums[i], i});
+                    result[i - k + 1] = priorityQueue.peek()[0];
                 }
-                return priorityQueueResult;
+                return result;
             case 2:
                 //双端队列
-                Deque<Integer> dequeWindow = new LinkedList<>();
+                Deque<Integer> deque = new LinkedList<>();
                 for (int i = 0; i < k; i++) {
-                    while (!dequeWindow.isEmpty() && nums[i] >= nums[dequeWindow.getLast()]) {
-                        dequeWindow.pollLast();
+                    while (!deque.isEmpty() && nums[deque.getLast()] <= nums[i]) {
+                        deque.pollLast();
                     }
-                    dequeWindow.addLast(i);
+                    deque.addLast(i);
                 }
                 int[] dequeResult = new int[n - k + 1];
-                dequeResult[0] = nums[dequeWindow.peekFirst()];
+                dequeResult[0] = nums[deque.peekFirst()];
                 for (int i = k; i < n; i++) {
-                    while (!dequeWindow.isEmpty() && nums[i] >= nums[dequeWindow.getLast()]) {
-                        dequeWindow.pollLast();
+                    if (deque.getFirst() <= i - k) {
+                        deque.pollFirst();
                     }
-                    dequeWindow.addLast(i);
-                    while (dequeWindow.peekFirst() <= i - k) {
-                        dequeWindow.pollFirst();
+                    while (!deque.isEmpty() && nums[deque.getLast()] <= nums[i]) {
+                        deque.pollLast();
                     }
-                    dequeResult[i - k + 1] = nums[dequeWindow.peekFirst()];
+                    deque.addLast(i);
+                    dequeResult[i - k + 1] = nums[deque.peekFirst()];
                 }
                 return dequeResult;
             case 3:
                 //分块+预处理
-                int[] right = new int[n];
-                int[] left = new int[n];
+                int[] prefix = new int[n];
+                int[] suffix = new int[n];
                 for (int i = 0; i < n; i++) {
                     if (i % k == 0) {
-                        left[i] = nums[i];
+                        suffix[i] = nums[i];
                     } else {
-                        left[i] = Math.max(nums[i], left[i - 1]);
+                        suffix[i] = Math.max(suffix[i - 1], nums[i]);
                     }
                 }
-                for (int i = n - 1; i >= 0; --i) {
-                    if (i == n - 1 || (i + 1) % k == 0) {
-                        right[i] = nums[i];
+                for (int i = n - 1; i >= 0; i--) {
+                    if (i == n - 1 || i % k == 0) {
+                        prefix[i] = nums[i];
                     } else {
-                        right[i] = Math.max(nums[i], right[i + 1]);
+                        prefix[i] = Math.max(prefix[i + 1], nums[i]);
                     }
                 }
-                int[] result = new int[n - k + 1];
+                int[] preProcessResult = new int[n - k + 1];
                 for (int i = 0; i < n - k + 1; i++) {
-                    result[i] = Math.max(right[i], left[i + k - 1]);
+                    preProcessResult[i] = Math.max(prefix[i], suffix[i + k - 1]);
                 }
-                return result;
+                return preProcessResult;
             default:
                 return null;
         }
