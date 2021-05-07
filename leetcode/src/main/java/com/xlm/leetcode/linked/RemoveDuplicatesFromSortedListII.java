@@ -33,7 +33,6 @@ public class RemoveDuplicatesFromSortedListII {
     }
 
     /**
-     *
      * @param head
      * @param model 1:迭代,2:递归
      * @return
@@ -45,28 +44,19 @@ public class RemoveDuplicatesFromSortedListII {
         switch (model) {
             case 1:
                 //迭代
-                // prev:前一个不重复的节点
-                // currentHead:当前可能重复的节点
-                // end: 可能重复节点范围的最后一个节点
-                ListNode dummy = new ListNode(-1);
+                ListNode dummy = new ListNode(-1, head);
                 ListNode prev = dummy;
-                ListNode currentHead = head;
-                ListNode end = head;
-                while (currentHead.next != null && end.next != null) {
-                    if (currentHead.val != end.next.val) {
-                        if (currentHead == end) {
-                            prev.next = end;
-                            prev = end;
+                while (prev.next != null && prev.next.next != null) {
+                    if (prev.next.val != prev.next.next.val) {
+                        prev = prev.next;
+                    } else {
+                        ListNode repeatCurr = prev.next;
+                        while (repeatCurr != null && repeatCurr.next != null && repeatCurr.val == repeatCurr.next.val) {
+                            repeatCurr = repeatCurr.next;
                         }
-                        currentHead = end.next;
+                        prev.next = repeatCurr.next;
                     }
-                    end = end.next;
                 }
-                if (currentHead == end) {
-                    prev.next = end;
-                    prev = end;
-                }
-                prev.next = null;
                 return dummy.next;
             case 2:
                 //递归
@@ -81,11 +71,11 @@ public class RemoveDuplicatesFromSortedListII {
             return head;
         }
         if (head.val == head.next.val) {
-            while (head.next != null && head.val == head.next.val) {
+            while (head.next != null && head.val == head.next.val){
                 head = head.next;
             }
             return deleteDuplicatesRecursive(head.next);
-        } else {
+        }else {
             head.next = deleteDuplicatesRecursive(head.next);
             return head;
         }
