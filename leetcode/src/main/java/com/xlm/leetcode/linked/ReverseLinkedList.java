@@ -16,11 +16,7 @@ package com.xlm.leetcode.linked;
 public class ReverseLinkedList {
     public static void main(String[] args) {
         ListNode head = ListNode.getSortedListNode(5);
-        ListNode listNode = reverseList(head, 2);
-        while (listNode != null) {
-            System.out.println(listNode.val);
-            listNode = listNode.next;
-        }
+        ListNode.print(reverseList(head, 2));
     }
 
     /**
