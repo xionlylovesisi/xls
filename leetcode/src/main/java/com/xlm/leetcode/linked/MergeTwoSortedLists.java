@@ -10,7 +10,7 @@ package com.xlm.leetcode.linked;
  * @date 2020/9/23
  * @description
  */
-public class MergeSortedLinkedList {
+public class MergeTwoSortedLists {
     public static void main(String[] args) {
 
         ListNode first = ListNode.getSortedListNode(3);
@@ -37,19 +37,18 @@ public class MergeSortedLinkedList {
             case 1:
                 // 迭代
                 ListNode dummy = new ListNode(-1);
-                ListNode curr = dummy;
+                ListNode newCurr = dummy;
                 while (l1 != null && l2 != null) {
                     if (l1.val < l2.val) {
-                        curr.next = l1;
-                        curr = curr.next;
+                        newCurr.next = l1;
                         l1 = l1.next;
                     } else {
-                        curr.next = l2;
-                        curr = curr.next;
+                        newCurr.next = l2;
                         l2 = l2.next;
                     }
+                    newCurr = newCurr.next;
                 }
-                curr.next = l1 != null ? l1 : l2;
+                newCurr.next = l1 == null ? l2 : l1;
                 return dummy.next;
             case 2:
                 // 递归

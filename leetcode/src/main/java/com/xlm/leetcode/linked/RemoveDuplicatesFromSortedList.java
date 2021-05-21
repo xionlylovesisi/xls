@@ -1,6 +1,26 @@
 package com.xlm.leetcode.linked;
 
 /**
+ * ### 83. 删除排序链表中的重复元素
+ * <p>
+ * 存在一个按升序排列的链表，给你这个链表的头节点 `head` ，请你删除所有重复的元素，使每个元素 **只出现一次** 。
+ * <p>
+ * 返回同样按升序排列的结果链表。
+ * <p>
+ * #### 示例 1：
+ * <p>
+ * ```
+ * 输入：head = [1,1,2]
+ * 输出：[1,2]
+ * ```
+ * <p>
+ * #### 示例 2：
+ * <p>
+ * ```
+ * 输入：head = [1,1,2,3,3]
+ * 输出：[1,2,3]
+ * ```
+ *
  * @author mcx
  * @date 2021/4/8
  */
@@ -15,7 +35,6 @@ public class RemoveDuplicatesFromSortedList {
     }
 
     /**
-     *
      * @param head
      * @param model 1:迭代,2:递归
      * @return
@@ -32,7 +51,7 @@ public class RemoveDuplicatesFromSortedList {
                 while (curr.next != null) {
                     if (curr.val == curr.next.val) {
                         curr.next = curr.next.next;
-                    }else {
+                    } else {
                         curr = curr.next;
                     }
                 }
@@ -49,10 +68,10 @@ public class RemoveDuplicatesFromSortedList {
         if (head == null || head.next == null) {
             return head;
         }
-        while (head.next != null && head.val == head.next.val) {
+        deleteDuplicatesRecursive(head.next);
+        if (head.val == head.next.val) {
             head.next = head.next.next;
         }
-        head.next = deleteDuplicatesRecursive(head.next);
         return head;
     }
 }
