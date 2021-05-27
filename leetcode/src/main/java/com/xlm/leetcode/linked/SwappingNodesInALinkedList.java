@@ -44,6 +44,13 @@ public class SwappingNodesInALinkedList {
         ListNode.print(swapNodes(head, 2, 1));
     }
 
+    /**
+     *
+     * @param head
+     * @param k
+     * @param model 1:双指针
+     * @return
+     */
     public static ListNode swapNodes(ListNode head, int k, int model) {
         if (head == null) {
             return null;
