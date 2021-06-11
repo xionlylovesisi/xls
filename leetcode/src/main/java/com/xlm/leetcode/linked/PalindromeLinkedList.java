@@ -35,50 +35,44 @@ public class PalindromeLinkedList {
     }
 
     /**
-     *
      * @param head
      * @param model 1:快慢指针,2:将值复制到数组中,再使用双指针,3:递归
      * @return
      */
     public static boolean isPalindrome(ListNode head, int model) {
-        if (head == null || head.next == null) {
+        if (head == null) {
             return false;
         }
         switch (model) {
             case 1:
-                //快慢指针
+                //快慢指针+翻转链表
                 ListNode fast = head;
                 ListNode slow = head;
-                while (fast.next != null && fast.next.next != null) {
+                while (fast != null && fast.next != null) {
                     fast = fast.next.next;
                     slow = slow.next;
                 }
-                ListNode right = slow.next;
-                slow.next = null;
-                ListNode left = head;
-                right = reverseLinkedList(right);
-                while (left != null && right != null) {
-                    if (left.val != right.val) {
+                ListNode right = reverseLinkedList(slow);
+                while (right != null && head != null) {
+                    if (right.val != head.val) {
                         return false;
                     }
-                    left = left.next;
                     right = right.next;
+                    head = head.next;
                 }
                 return true;
             case 2:
                 // 将值复制到数组中,再使用双指针
-                List<ListNode> listNodeList = new ArrayList<>();
+                List<ListNode> list = new ArrayList<>();
                 while (head != null) {
-                    listNodeList.add(head);
+                    list.add(head);
                     head = head.next;
                 }
-                int leftIndex = 0;
-                int rightIndex = listNodeList.size() - 1;
-                while (leftIndex < rightIndex) {
-                    if (listNodeList.get(leftIndex).val != listNodeList.get(rightIndex).val) {
+                int rightIndex = list.size() - 1;
+                for (int i = 0; i < rightIndex; i++) {
+                    if (list.get(i).val != list.get(rightIndex).val) {
                         return false;
                     }
-                    leftIndex++;
                     rightIndex--;
                 }
                 return true;
@@ -90,31 +84,30 @@ public class PalindromeLinkedList {
                 return false;
         }
     }
-
+    private static ListNode front = null;
     private static boolean recursiveIsPalindrome(ListNode head) {
-        if (head !=null) {
-            if (!recursiveIsPalindrome(head.next)) {
-                return false;
-            }
-            if (front.val != head.val) {
-                return false;
-            }
-            front = front.next;
+        if (head == null) {
+            return true;
         }
+        if (!recursiveIsPalindrome(head.next)) {
+            return false;
+        }
+        if (front.val != head.val) {
+            return false;
+        }
+        front = front.next;
         return true;
     }
 
-    private static ListNode front;
 
     private static ListNode reverseLinkedList(ListNode head) {
-        ListNode pre = null;
-        ListNode curr = head;
-        while (curr != null) {
-            ListNode temp = curr.next;
-            curr.next = pre;
-            pre = curr;
-            curr = temp;
+        ListNode prev = null;
+        while (head != null) {
+            ListNode next = head.next;
+            head.next = prev;
+            prev = head;
+            head = next;
         }
-        return pre;
+        return prev;
     }
 }
