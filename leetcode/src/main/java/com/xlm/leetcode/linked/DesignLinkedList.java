@@ -31,11 +31,10 @@ package com.xlm.leetcode.linked;
  */
 public class DesignLinkedList {
     public static void main(String[] args) {
-        testLinkedList(2);
+        testLinkedList(1);
     }
 
     /**
-     *
      * @param model 1:单链表,2:双链表
      */
     private static void testLinkedList(int model) {
@@ -189,7 +188,7 @@ public class DesignLinkedList {
                 indexNode.prev.next = indexNode.next;
                 if (indexNode == tail) {
                     tail = indexNode.prev;
-                }else{
+                } else {
                     indexNode.next.prev = indexNode.prev;
                 }
             }
@@ -202,15 +201,15 @@ public class DesignLinkedList {
     }
 
     static class MyLinkedList {
-        private int size = 0;
         private ListNode first;
         private ListNode tail;
+        private int size;
 
         /**
          * Initialize your data structure here.
          */
         public MyLinkedList() {
-
+            this.size = 0;
         }
 
         private boolean isElementIndex(int index) {
@@ -225,12 +224,22 @@ public class DesignLinkedList {
             if (!isElementIndex(index)) {
                 return -1;
             }
-            ListNode temp = first;
-            for (int i = 0; i < index; i++) {
-                temp = temp.next;
+            if (index == 0) {
+                return first.val;
             }
-            return temp.val;
-
+            if (index == size - 1) {
+                return tail.val;
+            }
+            ListNode curr = first;
+            int currIndex = 0;
+            while (curr != null) {
+                if (currIndex == index) {
+                    return curr.val;
+                }
+                curr = curr.next;
+                currIndex++;
+            }
+            return -1;
         }
 
         /**
@@ -238,12 +247,13 @@ public class DesignLinkedList {
          * After the insertion, the new node will be the first node of the linked list.
          */
         public void addAtHead(int val) {
-            ListNode f = first;
-            ListNode newListNode = new ListNode(val, f);
-            first = newListNode;
-            if (f == null) {
-                tail = first;
+            ListNode newNode = new ListNode(val);
+            if (first == null) {
+                tail = newNode;
+            } else {
+                newNode.next = first;
             }
+            first = newNode;
             size++;
         }
 
@@ -251,37 +261,44 @@ public class DesignLinkedList {
          * Append a node of value val to the last element of the linked list.
          */
         public void addAtTail(int val) {
-            ListNode t = tail;
-            ListNode newListNode = new ListNode(val);
-            if (t == null) {
-                tail = first = newListNode;
+            ListNode newNode = new ListNode(val);
+            if (first == null) {
+                first = newNode;
             } else {
-                t.next = newListNode;
-                tail = newListNode;
+                tail.next = newNode;
             }
+            tail = newNode;
             size++;
         }
 
         /**
-         * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+         * Add a node of value val before the index-th node in the linked list.
+         * If index equals to the length of linked list, the node will be appended to the end of linked list.
+         * If index is greater than the length, the node will not be inserted.
          */
         public void addAtIndex(int index, int val) {
-            // 在链表中的第 index 个节点之前添加值为 val  的节点。
-            // 如果 index 等于链表的长度，则该节点将附加到链表的末尾。
-            if (index == size) {
-                addAtTail(val);
-            } else if (index <= 0) {
-                //如果index小于0，则在头部插入节点。
-                addAtHead(val);
-            } else {
-                ListNode prev = new ListNode(-1, first);
-                for (int i = 0; i < index; i++) {
-                    prev = prev.next;
-                }
-                ListNode newListNode = new ListNode(val, prev.next);
-                prev.next = newListNode;
-                size++;
+            if (index > size) {
+                return;
             }
+            ListNode newNode = new ListNode(val);
+            if (index <= 0) {
+                newNode.next = first;
+                first = newNode;
+                if (tail == null) {
+                    tail = newNode;
+                }
+            } else if (index == size) {
+                tail.next = newNode;
+                tail = newNode;
+            } else {
+                ListNode curr = first;
+                for (int i = 0; i < index - 1; i++) {
+                    curr = curr.next;
+                }
+                newNode.next = curr.next;
+                curr.next = newNode;
+            }
+            size++;
         }
 
         /**
@@ -294,16 +311,17 @@ public class DesignLinkedList {
             if (index == 0) {
                 first = first.next;
             } else {
-                ListNode prev = new ListNode(-1, first);
-                for (int i = 0; i < index; i++) {
-                    prev = prev.next;
+                ListNode curr = first;
+                for (int i = 0; i < index - 1; i++) {
+                    curr = curr.next;
                 }
-                if (prev.next == tail) {
-                    tail = prev;
+                curr.next = curr.next.next;
+                if (index == size - 1) {
+                    tail = curr;
                 }
-                prev.next = prev.next.next;
             }
             size--;
+
         }
 
         public void print() {
