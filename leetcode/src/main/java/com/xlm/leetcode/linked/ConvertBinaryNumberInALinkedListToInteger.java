@@ -55,7 +55,6 @@ public class ConvertBinaryNumberInALinkedListToInteger {
     }
 
     /**
-     *
      * @param head
      * @param model 1,官方答案模拟,2:递归
      * @return
@@ -84,8 +83,8 @@ public class ConvertBinaryNumberInALinkedListToInteger {
         if (head == null) {
             return 0;
         }
-        int count = recursiveGetDecimalValue(head.next);
-        count += head.val << power++;
-        return count;
+        int sum = recursiveGetDecimalValue(head.next);
+        sum += head.val << power++;
+        return sum;
     }
 }

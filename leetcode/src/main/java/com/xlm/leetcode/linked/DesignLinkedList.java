@@ -31,7 +31,7 @@ package com.xlm.leetcode.linked;
  */
 public class DesignLinkedList {
     public static void main(String[] args) {
-        testLinkedList(1);
+        testLinkedList(2);
     }
 
     /**
@@ -60,15 +60,29 @@ public class DesignLinkedList {
                 MyDoublyLinkedList myDoublyLinkedList = new MyDoublyLinkedList();
                 myDoublyLinkedList.addAtHead(7);
                 myDoublyLinkedList.addAtTail(0);
+                // 7->0
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.deleteAtIndex(1);
+                // 7
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.addAtTail(5);
+                // 7->5
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.addAtIndex(1, 1);
                 myDoublyLinkedList.addAtIndex(2, 6);
+                // 7->1->6->5
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.deleteAtIndex(2);
                 myDoublyLinkedList.deleteAtIndex(1);
+                // 7->5
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.addAtTail(7);
+                // 7->5->7
+                myDoublyLinkedList.print();
                 myDoublyLinkedList.addAtIndex(1, 7);
                 myDoublyLinkedList.addAtTail(6);
+                // 7->7->5->7->6
+                myDoublyLinkedList.print();
                 break;
             default:
                 return;
@@ -76,7 +90,7 @@ public class DesignLinkedList {
     }
 
     static class MyDoublyLinkedList {
-        private int size = 0;
+        private int size;
         private DoublyListNode first;
         private DoublyListNode tail;
 
@@ -84,7 +98,7 @@ public class DesignLinkedList {
          * Initialize your data structure here.
          */
         public MyDoublyLinkedList() {
-
+            size = 0;
         }
 
         private boolean isElementIndex(int index) {
@@ -96,26 +110,29 @@ public class DesignLinkedList {
          * If the index is invalid, return -1.
          */
         public int get(int index) {
-            if (!isElementIndex(index)) {
-                return -1;
+            DoublyListNode result = getIndex(index);
+            if (result != null) {
+                return result.val;
             }
-            return getIndex(index).val;
+            return -1;
         }
 
         private DoublyListNode getIndex(int index) {
-            DoublyListNode temp;
-            if (index < size / 2) {
-                temp = first;
-                for (int i = 0; i < index; i++) {
-                    temp = temp.next;
-                }
-            } else {
-                temp = tail;
-                for (int i = size - 1; i > index; i--) {
-                    temp = temp.prev;
-                }
+            if (!isElementIndex(index)) {
+                return null;
             }
-            return temp;
+            DoublyListNode curr = first;
+            int currIndex = 0;
+            DoublyListNode result = null;
+            while (curr != null) {
+                if (currIndex == index) {
+                    result = curr;
+                    break;
+                }
+                curr = curr.next;
+                currIndex++;
+            }
+            return result;
         }
 
         /**
@@ -123,13 +140,14 @@ public class DesignLinkedList {
          * After the insertion, the new node will be the first node of the linked list.
          */
         public void addAtHead(int val) {
-            DoublyListNode f = first;
-            DoublyListNode newListNode = new DoublyListNode(null, val, f);
-            first = newListNode;
-            if (f == null) {
-                tail = first;
+            DoublyListNode newNode = new DoublyListNode(val);
+            if (first == null) {
+                first = newNode;
+                tail = newNode;
             } else {
-                f.prev = newListNode;
+                first.prev = newNode;
+                newNode.next = first;
+                first = newNode;
             }
             size++;
         }
@@ -138,33 +156,43 @@ public class DesignLinkedList {
          * Append a node of value val to the last element of the linked list.
          */
         public void addAtTail(int val) {
-            DoublyListNode t = tail;
-            DoublyListNode newListNode = new DoublyListNode(t, val, null);
-            if (t == null) {
-                tail = first = newListNode;
+            DoublyListNode newNode = new DoublyListNode(val);
+            if (tail == null) {
+                first = newNode;
             } else {
-                t.next = newListNode;
-                tail = newListNode;
+                newNode.prev = tail;
+                tail.next = newNode;
             }
+            tail = newNode;
             size++;
         }
 
         /**
-         * Add a node of value val before the index-th node in the linked list. If index equals to the length of linked list, the node will be appended to the end of linked list. If index is greater than the length, the node will not be inserted.
+         * Add a node of value val before the index-th node in the linked list.
+         * If index equals to the length of linked list, the node will be appended to the end of linked list.
+         * If index is greater than the length, the node will not be inserted.
          */
         public void addAtIndex(int index, int val) {
-            // 在链表中的第 index 个节点之前添加值为 val  的节点。
-            // 如果 index 等于链表的长度，则该节点将附加到链表的末尾。
-            if (index == size) {
-                addAtTail(val);
-            } else if (index <= 0) {
-                //如果index小于0，则在头部插入节点。
+            if (index > size) {
+                return;
+            }
+            if (index < 0) {
                 addAtHead(val);
+            } else if (index == size) {
+                addAtTail(val);
             } else {
-                DoublyListNode indexNode = getIndex(index);
-                DoublyListNode newDoublyListNode = new DoublyListNode(indexNode.prev, val, indexNode);
-                indexNode.prev.next = newDoublyListNode;
-                indexNode.prev = newDoublyListNode;
+                DoublyListNode prevNode = getIndex(index-1);
+                DoublyListNode newNode = new DoublyListNode(val);
+                if (prevNode == null) {
+                    newNode.next = first;
+                    first.prev = newNode;
+                    first = newNode;
+                }else {
+                    newNode.next = prevNode.next;
+                    prevNode.next.prev = newNode;
+                    newNode.prev = prevNode;
+                    prevNode.next = newNode;
+                }
                 size++;
             }
         }
@@ -176,21 +204,24 @@ public class DesignLinkedList {
             if (!isElementIndex(index)) {
                 return;
             }
-            if (index == 0) {
-                if (first != tail) {
-                    first = first.next;
-                    first.next.prev = first.prev;
-                } else {
-                    first = tail = null;
+            DoublyListNode toBeDeletedNode = getIndex(index);
+            if (toBeDeletedNode == first) {
+                first = toBeDeletedNode.next;
+                if (first == null) {
+                    tail = null;
+                    return;
                 }
-            } else {
-                DoublyListNode indexNode = getIndex(index);
-                indexNode.prev.next = indexNode.next;
-                if (indexNode == tail) {
-                    tail = indexNode.prev;
-                } else {
-                    indexNode.next.prev = indexNode.prev;
+                first.prev = null;
+            }else if(toBeDeletedNode == tail){
+                tail = toBeDeletedNode.prev;
+                if (tail == null) {
+                    first = null;
+                    return;
                 }
+                tail.next = null;
+            }else{
+                toBeDeletedNode.prev.next = toBeDeletedNode.next;
+                toBeDeletedNode.next.prev = toBeDeletedNode.prev;
             }
             size--;
         }
@@ -280,25 +311,20 @@ public class DesignLinkedList {
             if (index > size) {
                 return;
             }
-            ListNode newNode = new ListNode(val);
             if (index <= 0) {
-                newNode.next = first;
-                first = newNode;
-                if (tail == null) {
-                    tail = newNode;
-                }
+                addAtHead(val);
             } else if (index == size) {
-                tail.next = newNode;
-                tail = newNode;
+                addAtTail(val);
             } else {
+                ListNode newNode = new ListNode(val);
                 ListNode curr = first;
                 for (int i = 0; i < index - 1; i++) {
                     curr = curr.next;
                 }
                 newNode.next = curr.next;
                 curr.next = newNode;
+                size++;
             }
-            size++;
         }
 
         /**

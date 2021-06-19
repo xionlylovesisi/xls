@@ -1,7 +1,5 @@
 package com.xlm.leetcode.linked;
 
-import java.util.Random;
-
 /**
  * @author mcx
  * @date 2021/3/23
