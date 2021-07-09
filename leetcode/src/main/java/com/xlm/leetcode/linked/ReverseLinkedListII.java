@@ -2,35 +2,35 @@ package com.xlm.leetcode.linked;
 
 /**
  * ### 92. 反转链表 II
- *
+ * <p>
  * 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left <= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。
- *
+ * <p>
  * #### **示例 1：**
- *
+ * <p>
  * ```
  * 输入：head = [1,2,3,4,5], left = 2, right = 4
  * 输出：[1,4,3,2,5]
  * ```
- *
+ * <p>
  * **示例 2：**
- *
+ * <p>
  * ```
  * 输入：head = [5], left = 1, right = 1
  * 输出：[5]
  * ```
- *
+ * <p>
  * 实现方案: 1:定位待翻转链表,与原链表断开,翻转链表,将翻转后的链表再拼回原链表,2:一遍循环
+ *
  * @author mcx
  * @date 2021/5/12
  */
 public class ReverseLinkedListII {
     public static void main(String[] args) {
         ListNode head = ListNode.getSortedListNode(5);
-        ListNode.print(reverseBetween(head, 2, 4, 2));
+        ListNode.print(reverseBetween(head, 2, 4, 1));
     }
 
     /**
-     *
      * @param head
      * @param left
      * @param right
@@ -44,55 +44,43 @@ public class ReverseLinkedListII {
         switch (model) {
             case 1:
                 // 定位待翻转链表,与原链表断开,翻转链表,将翻转后的链表再拼回原链表
-                ListNode dummy = new ListNode(-1, head);
-                ListNode prev = dummy;
-                ListNode curr = head;
-                int index = 1;
+                int index1 = 0;
+                ListNode dummy1 = new ListNode(-1, head);
+                ListNode curr = dummy1;
                 while (curr != null) {
-                    if (index == left) {
-                        ListNode reverseHead = curr;
-                        for (int i = index; i < right; i++) {
-                            curr = curr.next;
-                        }
-                        ListNode next = curr.next;
+                    if (index1 == left-1) {
+                        ListNode prev = curr;
+                        ListNode revertHead = curr.next;
                         curr.next = null;
-                        prev.next = reverse(reverseHead);
-                        reverseHead.next = next;
+                        ListNode revertCurr = revertHead;
+                        for (int i = left; i < right; i++) {
+                            revertCurr = revertCurr.next;
+                        }
+                        ListNode tailHead = revertCurr.next;
+                        revertCurr.next = null;
+                        prev.next = reverse(revertHead);
+                        revertHead.next = tailHead;
                         break;
                     }
-                    prev = curr;
                     curr = curr.next;
-                    index++;
+                    index1++;
                 }
-                return dummy.next;
+                return dummy1.next;
             case 2:
                 //一遍循环
-                ListNode dummy2 = new ListNode(-1,head);
-                ListNode pre = dummy2;
-                for (int i = 0; i < left-1; i++) {
-                    pre = pre.next;
-                }
-                ListNode current = pre.next;
-                for (int i = 0; i < right - left; i++) {
-                    ListNode next = current.next;
-                    current.next = next.next;
-                    next.next = pre.next;
-                    pre.next = next;
-                }
-                return dummy2.next;
+
             default:
                 return null;
         }
     }
 
     private static ListNode reverse(ListNode reverseHead) {
-        ListNode prev = null;
-        while (reverseHead != null) {
-            ListNode next = reverseHead.next;
-            reverseHead.next = prev;
-            prev = reverseHead;
-            reverseHead = next;
+        if (reverseHead == null || reverseHead.next == null) {
+            return reverseHead;
         }
-        return prev;
+        ListNode newHead = reverse(reverseHead.next);
+        reverseHead.next.next = reverseHead;
+        reverseHead.next = null;
+        return newHead;
     }
 }
