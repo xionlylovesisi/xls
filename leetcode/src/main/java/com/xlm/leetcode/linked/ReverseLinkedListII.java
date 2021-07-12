@@ -27,7 +27,7 @@ package com.xlm.leetcode.linked;
 public class ReverseLinkedListII {
     public static void main(String[] args) {
         ListNode head = ListNode.getSortedListNode(5);
-        ListNode.print(reverseBetween(head, 2, 4, 1));
+        ListNode.print(reverseBetween(head, 2, 4, 2));
     }
 
     /**
@@ -48,7 +48,7 @@ public class ReverseLinkedListII {
                 ListNode dummy1 = new ListNode(-1, head);
                 ListNode curr = dummy1;
                 while (curr != null) {
-                    if (index1 == left-1) {
+                    if (index1 == left - 1) {
                         ListNode prev = curr;
                         ListNode revertHead = curr.next;
                         curr.next = null;
@@ -68,7 +68,21 @@ public class ReverseLinkedListII {
                 return dummy1.next;
             case 2:
                 //一遍循环
-
+                ListNode dummy2 = new ListNode(-1, head);
+                ListNode prev = dummy2;
+                for (int i = 0; i < left - 1; i++) {
+                    prev = prev.next;
+                }
+                ListNode curr2 = prev.next;
+                int index = left;
+                while (curr2 != null && curr2.next != null && index < right) {
+                    ListNode next = curr2.next.next;
+                    curr2.next.next = prev.next;
+                    prev.next = curr2.next;
+                    curr2.next = next;
+                    index++;
+                }
+                return dummy2.next;
             default:
                 return null;
         }

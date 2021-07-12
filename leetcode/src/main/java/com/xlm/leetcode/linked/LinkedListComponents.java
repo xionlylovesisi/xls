@@ -57,13 +57,14 @@ public class LinkedListComponents {
         switch (model) {
             case 1:
                 // 使用HashSet
-                int result = 0;
-                Set<Integer> subSet = new HashSet<>(G.length);
+                Set<Integer> subList = new HashSet<>(G.length);
                 for (int i : G) {
-                    subSet.add(i);
+                    subList.add(i);
                 }
+                int result = 0;
                 while (head != null) {
-                    if (subSet.contains(head.val) && (head.next == null || !subSet.contains(head.next.val))) {
+                    boolean needCount = subList.contains(head.val) && (head.next == null || !subList.contains(head.next.val));
+                    if (needCount) {
                         result++;
                     }
                     head = head.next;
